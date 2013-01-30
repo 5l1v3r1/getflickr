@@ -1,0 +1,11 @@
+#!/bin/bash
+# Download all photos mentioned in flickr georss feed with GPS Exif data in tact.
+# Download flickr geo rss feed and get all photo ids
+wget http://api.flickr.com/services/feeds/geo
+grep -o '\(([0-9]\{3\})\|[0-9]\{3\}\)[ -]\?[0-9]\{3\}[ -]\?[0-9]\{4\}' geo > ids.txt
+file=ids.txt
+while read line       
+#Put this script in exif.py make sure you install dependencies mentioned in article
+    do python exif.py "$line"
+        done < "$file"
+
